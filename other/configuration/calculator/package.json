@@ -8,6 +8,7 @@
     "build": "webpack --mode=production",
     "start": "serve --port 8080",
     "test": "jest --coverage",
+    "test:coverage": "npm test --coverage && open coverage/lcov-report/index.html",
     "test:watch": "jest --watch"
   },
   "keywords": [],
