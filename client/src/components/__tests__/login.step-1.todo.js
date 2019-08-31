@@ -1,35 +1,26 @@
-// Basic unit test
-test('calls onSubmit with the username and password when submitted', () => {
-  // Arrange
-  // 🐨 create a fake object to hold the form field values (username and password)
-  // 🐨 create a jest.fn() for your submit handler
-  // 🐨 render the Login component to a div
-  // 💰 const div = document.createElement('div')
-  //
-  // 🐨 get the field nodes
-  // 💰 const inputs = div.querySelectorAll('input')
-  // 💰 const form = div.querySelector('form')
-  // 🐨 fill in the field values
-  //
-  // Act
-  // 🐨 submit the form:
-  // 💰 formNode.dispatchEvent(new window.Event('submit'))
-  //
-  // Assert
-  // 🐨 ensure your submit handler was called properly
-})
+import React from 'react'
+import reactDom from 'react-dom'
 
-//////// Elaboration & Feedback /////////
-// When you've finished with the exercises:
-// 1. Copy the URL below into your browser and fill out the form
-// 2. remove the `.skip` from the test below
-// 3. Change submitted from `false` to `true`
-// 4. And you're all done!
-/*
-http://ws.kcd.im/?ws=Testing&e=login.step-1&em=
-*/
-test.skip('I submitted my elaboration and feedback', () => {
-  const submitted = false // change this when you've submitted!
-  expect(submitted).toBe(true)
+import Login from '../login'
+
+test('calls onSubmit with the username and password when submitted', () => {
+  const onSubmit = jest.fn()
+
+  const container = document.createElement('div')
+  reactDom.render(<Login onSubmit={onSubmit} />, container)
+
+  const username = container.querySelector('[name=username]')
+  const password = container.querySelector('[name=password]')
+  const form = container.querySelector('form')
+
+  username.value = 'rafa'
+  password.value = '123'
+
+  form.dispatchEvent(new window.Event('submit'))
+
+  expect(onSubmit).toHaveBeenCalledTimes(1)
+  expect(onSubmit).toHaveBeenCalledWith({
+    username: 'rafa',
+    password: '123',
+  })
 })
-////////////////////////////////
