@@ -18,7 +18,7 @@ test('calls onSubmit with the username and password when submitted', () => {
   username.value = 'rafa'
   password.value = '123'
 
-  fireEvent.click(submit)
+  submit.click(submit)
   fireEvent.submit(form)
 
   expect(onSubmit).toHaveBeenCalledTimes(2)
